@@ -1,0 +1,34 @@
+﻿@page "/Success"
+@page "/Success/{Id:int}"
+@using FamilyApp.Data
+@using FamilyApp.Models
+@inject IFamilyService FamilyService
+@inject NavigationManager NavigationManager
+
+<h3 style="color: #e4606d">New member has been added to @Family.FamilyName Family</h3>
+
+<p class="actions">
+                <button class="btn btn-outline-dark button-p" @onclick="@(() => NavigateToFamily())">Go to @Family.FamilyName Family Page</button>
+            </p>
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    public Family Family { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != 0)
+        {
+            Family = FamilyService.GetFamilies().First(f => f.Id == Id);
+
+        }
+    }
+
+    private void NavigateToFamily()
+    {
+        NavigationManager.NavigateTo("FamilyPage/" + Family.Id);
+    }
+
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "Species": null,
+    "Name": "Cutie",
+    "Age": 1
+  },
+  {
+    "Id": 2,
+    "Species": "Dog",
+    "Name": "Felix",
+    "Age": 3
+  },
+  {
+    "Id": 3,
+    "Species": "Bunny",
+    "Name": "Sugar",
+    "Age": 1
+  },
+  {
+    "Id": 4,
+    "Species": "Cat",
+    "Name": "Minion",
+    "Age": 4
+  },
+  {
+    "Id": 5,
+    "Species": "Cat",
+    "Name": "Kedi",
+    "Age": 2
+  },
+  {
+    "Id": 6,
+    "Species": "Cat",
+    "Name": "Medi",
+    "Age": 2
+  },
+  {
+    "Id": 7,
+    "Species": "Snake",
+    "Name": "Severus",
+    "Age": 1
+  },
+  {
+    "Id": 8,
+    "Species": "Dog",
+    "Name": "Bobo",
+    "Age": 5
+  },
+  {
+    "Id": 9,
+    "Species": "Cat",
+    "Name": "Silvia",
+    "Age": 2
+  }
+]

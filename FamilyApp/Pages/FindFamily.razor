@@ -1,0 +1,58 @@
+﻿@page "/FindFamily"
+@using FamilyApp.Models
+@using FamilyApp.Data
+@inject NavigationManager NavigationManager
+@inject IFamilyService FamilyService
+<h3>Find Family</h3>
+<img src="/images/family4.jpg" alt="family" class="img-thumbnail">
+<p>Enter family name
+            <br/>
+            <input @bind="byName"/>
+        </p>
+<p class="actions">
+                <button class="btn btn-outline-dark button-p"  @onclick="@(() => FilterByName(byName))">Search</button>
+            </p>
+<p style="color: #c82333">@errorMessage</p>
+
+
+@code {
+
+
+    private IList<Family> filteredFamily;
+    private IList<Family> families;
+
+    private string? byName;
+    private string errorMessage = "";
+  
+    protected override async Task OnInitializedAsync()
+    {
+        filteredFamily=new List<Family>();
+        families = FamilyService.GetFamilies();
+    }
+    
+    private void FilterByName(String byName)
+    {
+        if (byName == " ")
+        {
+            errorMessage = "Please enter family name!";
+        }
+
+        else
+        {
+            errorMessage = "";
+            
+          //filters families by given word-- family name
+            
+            filteredFamily = families.Where(f => f.FamilyName.Equals(byName.Trim(), StringComparison.OrdinalIgnoreCase)).ToList();
+            try{
+                
+                NavigationManager.NavigateTo("FamilyPage/" +filteredFamily[0].Id);
+            }
+            catch(Exception e)
+            {
+                errorMessage = "No result";
+            }
+            
+        }
+    }
+}

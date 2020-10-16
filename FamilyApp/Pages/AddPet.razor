@@ -1,0 +1,64 @@
+﻿@page "/AddPet"
+@page "/AddPet/{Id:int}"
+@using FamilyApp.Models
+@using FamilyApp.Data
+@inject IMemberService MemberService
+@inject IFamilyService FamilyService
+@inject NavigationManager NavigationManager
+<h3>Add Pet</h3>
+
+<EditForm Model="@newPet" OnValidSubmit="@AddNewPet">
+        <DataAnnotationsValidator/>
+                    <ValidationSummary/>
+<div class="form-group">
+    Name<br/>
+    <InputText @bind-Value="newPet.Name"/>
+</div>
+        <div class="form-group">
+                    Age<br/>
+                    <InputNumber @bind-Value="newPet.Age"/>
+                </div>
+        <div class="form-group">
+                   <InputSelect class="form-control" id="species" @bind-Value="@newPet.Species" style="width:200px">
+                       <option value="species" selected disabled>Species</option>  
+                       @foreach (var sp in species)
+                       {
+                           <option value="@sp">@sp</option>
+                       }
+        
+                   </InputSelect>
+                   
+                                      </div>
+        <p class="actions">
+                <button class="btn btn-outline-dark" type="submit">Add</button>
+            </p>
+        </EditForm>
+
+
+
+@code {
+        
+    [Parameter]
+    public int Id { get; set; }
+    public Family Family { get; set; }
+    private Pet newPet=new Pet();
+    
+        
+    protected override async Task OnInitializedAsync() {
+        if (Id != 0)
+        {
+            Family = FamilyService.GetFamilies().First(f => f.Id == Id);
+
+        }
+    }
+    
+    private void AddNewPet()
+    {
+        MemberService.AddPet(newPet);
+        FamilyService.AddPetToFamily(Family,newPet);
+        NavigationManager.NavigateTo("Success/" + Family.Id);
+        
+    }
+    
+    List<string> species = new[] {"Hamster", "Bunny", "Frog", "Budgerigar","Owl", "Snake", "Cat", "Dog", "None"}.ToList();
+}

@@ -1,0 +1,65 @@
+﻿@page "/Statistics"
+@using Syncfusion.Blazor.Charts
+@using FamilyApp.Data
+@using FamilyApp.Models
+@inject NavigationManager NavigationManager
+@inject IMemberService MemberService
+@attribute [Authorize]
+
+
+<div class="container mx-auto rounded ">
+   
+    <div class="mw-100 p-3 text-center blue">
+        <h3>Distribution of Ages</h3>
+        <ChartAgeComponent/>
+    </div>
+    
+    <div class="mw-100 p-3 my-3 p-3 text-center blue">
+        <h3>Distribution of Genders</h3>
+        <div class="row">
+            <div class="col-md-6 d-flex justify-content-md-around"><ChartGenderAdult/></div>
+            <div class="col-md-6 d-flex justify-content-md-around"><ChartGenderChild/></div>
+        </div>
+    </div>
+</div>
+
+
+@code{
+
+    static int ChildMale;
+    static int ChildFemale;
+    static int AdultMale;
+    static int AdultFemale;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        AdultFemale = MemberService.GetAdults().Where(a => a.Sex.Equals("F")).ToList().Count;
+        ChildFemale=MemberService.GetChildren().Where(c => c.Sex.Equals("F")).ToList().Count;
+        AdultMale = MemberService.GetAdults().Where(a => a.Sex.Equals("M")).ToList().Count;
+        ChildMale=MemberService.GetChildren().Where(c => c.Sex.Equals("M")).ToList().Count;
+        StateHasChanged();
+    }
+    
+    public class BarChartData
+    {
+        public string x { get; set; }
+        public int y { get; set; }
+        public int y1 { get; set; }
+    }
+
+    
+    public List<BarChartData> GenderData =  new List<BarChartData>
+    {
+        new BarChartData { x= "Adults",  y= AdultFemale , y1= AdultMale },
+        new BarChartData { x= "Children",  y= ChildFemale , y1= ChildFemale },
+      
+    };
+    string CurrentUri;
+    void ChartLoad(ILoadedEventArgs Args)
+    {
+        CurrentUri = NavigationManager.Uri;
+        Args.Theme = ChartTheme.Bootstrap4;
+        
+    }
+    
+    }
