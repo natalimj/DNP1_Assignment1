@@ -54,5 +54,13 @@
   {
     "ChildId": 7,
     "InterestId": "Gymnastics"
+  },
+  {
+    "ChildId": 8,
+    "InterestId": "Frozen"
+  },
+  {
+    "ChildId": 8,
+    "InterestId": "Gymnastics"
   }
 ]

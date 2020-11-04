@@ -175,5 +175,27 @@
     "Weight": 48,
     "Height": 155,
     "Sex": "F"
+  },
+  {
+    "ChildInterests": [
+      {
+        "ChildId": 8,
+        "InterestId": "Frozen"
+      },
+      {
+        "ChildId": 8,
+        "InterestId": "Gymnastics"
+      }
+    ],
+    "Pets": [],
+    "Id": 8,
+    "FirstName": "Solveig",
+    "LastName": "Munk",
+    "HairColor": "Blond",
+    "EyeColor": "Blue",
+    "Age": 6,
+    "Weight": 20,
+    "Height": 110,
+    "Sex": "F"
   }
 ]
